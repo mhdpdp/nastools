@@ -522,7 +522,7 @@ export class LayoutNavbar extends CustomElement {
   constructor() {
     super();
     this.layout_gopage = "";
-    this.layout_appversion = "v2.8.3 e950041";
+    this.layout_appversion = "v2.9.2 b9fa7ca";
     this.layout_userpris = navbar_list.map((item) => (item.name));
     this._active_name = "";
     this._update_appversion = "";
@@ -571,7 +571,7 @@ export class LayoutNavbar extends CustomElement {
             url = ret.url;
             break;
           case 2:
-            url = "https://github.com/NAStool/nas-tools/commits/master"
+            url = "https://github.com/mhdpdp/nastools/commits/master"
             break;
         }
         if (url) {
