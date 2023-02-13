@@ -402,8 +402,6 @@ def recommend():
     PersonId = request.args.get("personid") or ""
     Keyword = request.args.get("keyword") or ""
     Source = request.args.get("source") or ""
-    FilterKey = request.args.get("filter") or ""
-    Params = json.loads(request.args.get("params")) if request.args.get("params") else {}
     return render_template("discovery/recommend.html",
                            Type=Type,
                            SubType=SubType,
@@ -414,10 +412,7 @@ def recommend():
                            PersonId=PersonId,
                            SubTitle=SubTitle,
                            Keyword=Keyword,
-                           Source=Source,
-                           Filter=FilterKey,
-                           FilterConf=ModuleConf.DISCOVER_FILTER_CONF.get(FilterKey) if FilterKey else {},
-                           Params=Params)
+                           Source=Source)
 
 
 # 推荐页面
@@ -435,9 +430,7 @@ def douban_movie():
     return render_template("discovery/recommend.html",
                            Type="DOUBANTAG",
                            SubType="MOV",
-                           Title="豆瓣电影",
-                           Filter="douban_movie",
-                           FilterConf=ModuleConf.DISCOVER_FILTER_CONF.get('douban_movie'))
+                           Title="豆瓣电影")
 
 
 # 豆瓣电视剧
@@ -447,9 +440,7 @@ def douban_tv():
     return render_template("discovery/recommend.html",
                            Type="DOUBANTAG",
                            SubType="TV",
-                           Title="豆瓣电视剧",
-                           Filter="douban_tv",
-                           FilterConf=ModuleConf.DISCOVER_FILTER_CONF.get('douban_tv'))
+                           Title="豆瓣电视剧")
 
 
 @App.route('/tmdb_movie', methods=['POST', 'GET'])
@@ -458,9 +449,7 @@ def tmdb_movie():
     return render_template("discovery/recommend.html",
                            Type="DISCOVER",
                            SubType="MOV",
-                           Title="TMDB电影",
-                           Filter="tmdb_movie",
-                           FilterConf=ModuleConf.DISCOVER_FILTER_CONF.get('tmdb_movie'))
+                           Title="TMDB电影")
 
 
 @App.route('/tmdb_tv', methods=['POST', 'GET'])
@@ -469,9 +458,7 @@ def tmdb_tv():
     return render_template("discovery/recommend.html",
                            Type="DISCOVER",
                            SubType="TV",
-                           Title="TMDB电视剧",
-                           Filter="tmdb_tv",
-                           FilterConf=ModuleConf.DISCOVER_FILTER_CONF.get('tmdb_tv'))
+                           Title="TMDB电视剧")
 
 
 # Bangumi每日放送
