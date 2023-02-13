@@ -4,6 +4,7 @@ __pycache__
 *.pid
 test.py
 .DS_Store
+
 ### IntelliJ IDEA ###
 .idea
 *.iws
