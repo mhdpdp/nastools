@@ -1,10 +1,10 @@
 ![logo-blue](https://user-images.githubusercontent.com/51039935/197520391-f35db354-6071-4c12-86ea-fc450f04bc85.png)
-# NAS媒体库资源归集、整理自动化工具
+# NAS媒体库管理工具
 
-[![GitHub stars](https://img.shields.io/github/stars/jxxghp/nas-tools?style=plastic)](https://github.com/jxxghp/nas-tools/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/jxxghp/nas-tools?style=plastic)](https://github.com/jxxghp/nas-tools/network/members)
-[![GitHub issues](https://img.shields.io/github/issues/jxxghp/nas-tools?style=plastic)](https://github.com/jxxghp/nas-tools/issues)
-[![GitHub license](https://img.shields.io/github/license/jxxghp/nas-tools?style=plastic)](https://github.com/jxxghp/nas-tools/blob/master/LICENSE.md)
+[![GitHub stars](https://img.shields.io/github/stars/NAStool/nas-tools?style=plastic)](https://github.com/NAStool/nas-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/NAStool/nas-tools?style=plastic)](https://github.com/NAStool/nas-tools/network/members)
+[![GitHub issues](https://img.shields.io/github/issues/NAStool/nas-tools?style=plastic)](https://github.com/NAStool/nas-tools/issues)
+[![GitHub license](https://img.shields.io/github/license/NAStool/nas-tools?style=plastic)](https://github.com/NAStool/nas-tools/blob/master/LICENSE.md)
 [![Docker pulls](https://img.shields.io/docker/pulls/jxxghp/nas-tools?style=plastic)](https://hub.docker.com/r/jxxghp/nas-tools)
 [![Platform](https://img.shields.io/badge/platform-amd64/arm64-pink?style=plastic)](https://hub.docker.com/r/jxxghp/nas-tools)
 
@@ -20,27 +20,7 @@ API: http://localhost:3000/api/v1/
 
 ## 功能：
 
-本软件的初衷是实现影视资源的自动化管理，释放双手、聚焦观影。需要有良好的网络环境及私有站点才能获得较好的使用体验。
-
-### 1、资源检索和订阅
-* 站点RSS聚合，想看的加入订阅，资源自动实时追新。
-* 通过微信、Telegram、Slack、Synology Chat或者WEB界面聚合资源搜索下载，最新热门资源一键搜索或者订阅。
-* 与豆瓣联动，在豆瓣中标记想看后台自动检索下载，未出全的自动加入订阅。
-
-### 2、媒体库整理
-* 监控下载软件，下载完成后自动识别真实名称，硬链接到媒体库并重命名。
-* 对目录进行监控，文件变化时自动识别媒体信息硬链接到媒体库并重命名。
-* 解决保种与媒体库整理冲突的问题，专为中文环境优化，支持国产剧集和动漫，重命名准确率高，改名后Emby/Jellyfin/Plex完美刮削海报墙。
-
-### 3、站点养护
-* 全面的站点数据统计，实时监测你的站点流量情况。
-* 全自动化托管养站，支持远程下载器（本工具内建刷流功能仅为日常养站使用，如果追求数据建议使用更加强大的刷流工具：<a href="https://github.com/vertex-app/vertex" target="_blank">Vertex</a>）。
-* 站点每日自动登录保号。
-
-### 4、消息服务
-* 支持微信、Telegram、Slack、Synology Chat、Bark、PushPlus、爱语飞飞等近十种渠道图文消息通知
-* 支持通过微信、Telegram、Slack、Synology Chat远程控制订阅和下载。
-* Emby/Jellyfin/Plex播放状态通知。
+NAS媒体库管理工具。
 
 
 ## 安装
@@ -55,7 +35,7 @@ docker pull jxxghp/nas-tools:latest
 ### 2、本地运行
 python3.10版本，需要预安装cython，如发现缺少依赖包需额外安装
 ```
-git clone -b master https://github.com/jxxghp/nas-tools --recurse-submodule 
+git clone -b master https://github.com/NAStool/nas-tools --recurse-submodule 
 python3 -m pip install -r requirements.txt
 export NASTOOL_CONFIG="/xxx/config/config.yaml"
 nohup python3 run.py & 
@@ -64,7 +44,7 @@ nohup python3 run.py &
 ### 3、Windows
 下载exe文件，双击运行即可，会自动生成配置文件目录
 
-https://github.com/jxxghp/nas-tools/releases
+https://github.com/NAStool/nas-tools/releases
 
 ### 4、群晖套件
 添加矿神群晖SPK套件源直接安装：
@@ -78,12 +58,6 @@ https://spk7.imnks.com/
 ### 1、申请相关API KEY
 * 申请TMDB用户，在 https://www.themoviedb.org/ 申请用户，得到API KEY。
 
-* 申请消息通知服务
-  1) 微信（推荐）：在 https://work.weixin.qq.com/ 申请企业微信自建应用，获得企业ID、自建应用secret、agentid， 微信扫描自建应用二维码可实现在微信中使用消息服务，无需打开企业微信
-  2) Telegram（推荐）：关注BotFather申请机器人获取token，关注getuserID拿到chat_id。该渠道支持远程控制，详情参考："5、配置微信/Telegram/Slack/Synology Chat远程控制"。
-  3) Slack：在 https://api.slack.com/apps 申请应用，该渠道支持远程控制，详情参考频道说明。
-  4) Synology Chat：在群晖中安装Synology Chat套件，点击Chat界面"右上角头像->整合->机器人"创建机器人，"传出URL"设置为："NAStool地址/synology"，"传入URL"及"令牌"填入到NAStool消息服务设置中，该渠道支持远程控制。
-  5) 其它：仍然会持续增加对通知渠道的支持，API KEY获取方式类似，不一一说明。
 
 ### 2、基础配置
 * 文件转移模式说明：目前支持六种模式：复制、硬链接、软链接、移动、RCLONE、MINIO。
@@ -242,8 +216,4 @@ https://spk7.imnks.com/
    python3 app/filetransfer.py -m link -s /from/path -d /to/path
    ```
 
-## 鸣谢
-* 程序UI模板及图标来源于开源项目<a href="https://github.com/tabler/tabler">tabler</a>，此外项目中还使用到了开源模块：<a href="https://github.com/igorcmoura/anitopy" target="_blank">anitopy</a>、<a href="https://github.com/AnthonyBloomer/tmdbv3api" target="_blank">tmdbv3api</a>、<a href="https://github.com/pkkid/python-plexapi" target="_blank">python-plexapi</a>、<a href="https://github.com/rmartin16/qbittorrent-api">qbittorrent-api</a>、<a href="https://github.com/Trim21/transmission-rpc">transmission-rpc</a>等
-* 感谢 <a href="https://github.com/devome" target="_blank">nevinee</a> 完善docker构建
-* 感谢 <a href="https://github.com/tbc0309" target="_blank">tbc0309</a> 适配群晖套件
-* 感谢 PR 代码、完善WIKI、发布教程的所有大佬
+

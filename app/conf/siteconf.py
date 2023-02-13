@@ -517,16 +517,7 @@ class SiteConf:
         'mikanani.me': {
             "proxy": False
         },
-        'gaoqing.fm': {
-            "proxy": False
-        },
-        'www.mp4ba.vip': {
-            "proxy": False,
-            "referer": True
-        },
-        'www.miobt.com': {
-            "proxy": True
-        },
+
         'katcr.to': {
             "proxy": True,
             "language": "en"

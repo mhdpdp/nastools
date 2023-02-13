@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.isort]
+profile = "black"
+skip_glob = ["venv*"]
+force_single_line = true
+multi_line_output = 3
+
+[tool.black]
+target-version = ['py34']
+include = '\.pyi?$'
+
+[tool.pytest]
+testpaths = "tests"

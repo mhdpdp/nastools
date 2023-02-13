@@ -1,0 +1,102 @@
+name: lint
+
+on:
+  push:
+    branches-ignore:
+      - renovate/**
+  pull_request: {}
+
+jobs:
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - uses: liskin/gh-problem-matcher-wrap@v1
+        with:
+          action: add
+          linters: mypy
+
+      - name: mypy
+        run: mypy --show-column-numbers transmission_rpc
+
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - run: echo "::add-matcher::.github/workflows/matcher/flake8.json"
+
+      - name: flake8
+        run: |
+          flake8 \
+            --ignore=C0103,C0111,R0903,W503,W504,C812,C813,C815,C819,B008,E265,E501 \
+            --max-line-length=88 \
+            --exclude .venv,.git,__pycache__,docs/source/conf.py,old,build,dist
+
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - run: echo "::add-matcher::.github/workflows/matcher/pylint.json"
+
+      - name: pylint
+        run: pylint transmission_rpc tests
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - uses: Trim21/setup-poetry@dist/v1
+
+      - uses: Trim21/install-poetry-project@dist/v1
+        with:
+          extras: docs
+
+      - name: Get Latest tools version
+        run: echo "PY=$(python -VV | md5sum | cut -d' ' -f1)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cache/pre-commit
+          key: precommit-2-${{ env.PY }}-${{ hashFiles('.pre-commit-config.yaml') }}
+          restore-keys: precommit-2-${{ env.PY }}-
+
+      - name: pre-commit
+        run: pre-commit run --all-files --show-diff-on-failure && pre-commit gc

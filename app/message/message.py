@@ -28,7 +28,7 @@ class Message(object):
             'app.message.client',
             filter_func=lambda _, obj: hasattr(obj, 'schema')
         )
-        log.debug(f"【Message】: 已经加载的消息服务：{self._message_schemas}")
+        log.debug(f"【Message】加载消息服务：{self._message_schemas}")
         self.init_config()
 
     def init_config(self):
@@ -93,7 +93,7 @@ class Message(object):
         state, ret_msg = self.__build_class(ctype=ctype,
                                             conf=config).send_msg(title="测试",
                                                                   text="这是一条测试消息",
-                                                                  url="https://github.com/jxxghp/nas-tools")
+                                                                  url="https://github.com/NAStool/nas-tools")
         if not state:
             log.error(f"【Message】{ctype} 发送测试消息失败：%s" % ret_msg)
         return state

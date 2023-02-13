@@ -12,7 +12,6 @@ class DownloaderType(Enum):
     QB = 'Qbittorrent'
     TR = 'Transmission'
     Client115 = '115网盘'
-    Aria2 = 'Aria2'
     PikPak = 'PikPak'
 
 
@@ -93,3 +92,7 @@ class SiteSchema(Enum):
     TorrentLeech = "TorrentLeech"
     FileList = "FileList"
     TNode = "TNode"
+
+
+MovieTypes = ['MOV', '电影']
+TvTypes = ['TV', '电视剧']
