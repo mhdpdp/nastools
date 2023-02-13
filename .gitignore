@@ -1,0 +1,13 @@
+__pycache__
+*.sock
+*.log
+*.pid
+test.py
+.DS_Store
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+gen/

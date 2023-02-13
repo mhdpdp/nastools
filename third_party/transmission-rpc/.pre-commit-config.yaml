@@ -1,0 +1,66 @@
+default_stages: [commit]
+
+repos:
+  - repo: https://github.com/Trim21/pre-commit-hooks
+    rev: 2cd566d7d05582364aaa111f4522efd33857346c  # frozen: v0.5.1
+    hooks:
+      - id: poetry-check-lock
+      - id: find-trailing-comma
+      - id: force-yaml-file-ext
+        exclude: ^\.chglog/config\.yml$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3298ddab3c13dd77d6ce1fc0baf97691430d84b0  # frozen: v4.3.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-ast
+      - id: check-builtin-literals
+      - id: check-byte-order-marker
+      - id: check-toml
+      - id: check-yaml
+      - id: check-json
+      - id: check-docstring-first
+      - id: check-merge-conflict
+      - id: check-added-large-files # check for file bigger than 500kb
+      - id: debug-statements
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: end-of-file-fixer
+      - id: fix-encoding-pragma
+        args: [--remove]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: c5e8fa75dda5f764d20f66a215d71c21cfa198e1 # frozen: 5.10.1
+    hooks:
+      - id: isort
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: d232077d3bc16dcbaee30b42d35197f8bf337a36  # frozen: v2.37.1
+    hooks:
+      - id: pyupgrade
+        args: [--py36-plus]
+
+  - repo: https://github.com/myint/autoflake
+    rev: 7a53fdafc82c33f446915b60fcac947c51279260 # frozen: v1.4
+    hooks:
+      - id: autoflake
+        args:
+          - --in-place
+          - --remove-unused-variables
+          - --remove-all-unused-imports
+          - --expand-star-imports
+
+  - repo: https://github.com/PyCQA/doc8.git
+    rev: 5d785c948fd749776cbe714573996c323ff22db5  # frozen: 0.11.2
+    hooks:
+      - id: doc8
+        name: Check rst file
+        args: [--max-line-length=120]
+        files: \.rst$
+
+  - repo: https://github.com/psf/black
+    rev: f6c139c5215ce04fd3e73a900f1372942d58eca0  # frozen: 22.6.0
+    hooks:
+      - id: black
+        args: [--line-length=120]
